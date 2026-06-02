@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lisha P — Portfolio</title>
+    <meta name="description"
+        content="Portfolio of Lisha P, Computer Science Engineer, AI Explorer, and Full-Stack Developer. Building intelligent systems, scalable web applications, and data-driven products.">
+    <!-- Google Fonts: Outfit for sleek product headings, Inter for high-quality body copy -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Premium Frosted Navigation Bar -->
+    <nav id="navbar" class="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-brand">Lisha P</a>
+            <div class="nav-toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#what-i-do" class="nav-link">Expertise</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Section 1: Hero (Product Launch Landing Page) -->
+    <section id="hero" class="hero-section">
+        <div class="hero-container">
+            <!-- Left/Top Content Block -->
+            <div class="hero-content">
+                <span class="hero-tagline reveal">Computer Science Engineer • AI Explorer • Full-Stack Developer</span>
+                <h1 class="hero-title reveal">Lisha P</h1>
+                <p class="hero-subtitle reveal">Building intelligent systems, scalable web applications, and data-driven
+                    digital products.</p>
+                <div class="hero-actions reveal">
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="#contact" class="btn btn-secondary">Contact</a>
+                </div>
+            </div>
+
+            <!-- Right/Bottom Product Demo Trailer -->
+            <div class="hero-media-wrapper reveal">
+                <div class="product-trailer-frame">
+                    <div class="video-container" id="video-container">
+                        <!-- Generative Canvas visualizer acting as high-tech particle stream -->
+                        <canvas id="generative-canvas" class="demo-canvas"></canvas>
+
+                        <!-- Real Video Element using lisa.mp4 -->
+                        <!-- Real Video Element using lisa.mp4 -->
+                        <video id="demo-video" class="demo-video" autoplay muted playsinline>
+                            <source src="assets/lisa.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div id="video-overlay" class="video-overlay"></div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span class="mouse-icon"><span class="mouse-wheel"></span></span>
+            <span class="scroll-text">Scroll to explore</span>
+        </div>
+    </section>
+
+    <!-- Section 2: About (Minimal Storytelling) -->
+    <section id="about" class="about-section">
+        <div class="section-container">
+            <div class="about-grid">
+                <div class="about-headline reveal">
+                    <span class="section-subtitle">The Philosophy</span>
+                    <h2 class="section-title">Design. Logic. Intelligence.</h2>
+                </div>
+                <div class="about-content">
+                    <p class="about-line reveal">I build software systems that combine logic, design, and intelligence.
+                    </p>
+                    <p class="about-line reveal">My focus is AI systems, full-stack development, and business-driven
+                        applications.</p>
+                    <p class="about-line reveal">I enjoy turning complex problems into simple, usable products.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: "What I Do" (Apple-Style Glassmorphic Cards) -->
+    <section id="what-i-do" class="expertise-section">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-subtitle">Capabilities</span>
+                <h2 class="section-title">Engineering Verticals</h2>
+            </div>
+            <div class="expertise-grid">
+                <!-- Card 1: AI & ML -->
+                <div class="expertise-card reveal" id="card-ai">
+                    <div class="card-glow"></div>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                            <path d="M12 12h.01M8 8h.01M16 16h.01" />
+                            <circle cx="12" cy="12" r="10" stroke-dasharray="4 4" />
+                        </svg>
+                    </div>
+                    <h3 class="card-title">AI & Machine Learning</h3>
+                    <p class="card-desc">Developing sophisticated learning models, implementing Natural Language
+                        Processing, and engineering real-time predictive fraud detection pipelines.</p>
+                    <span class="card-tags">Fraud Detection • NLP • XGBoost • LSTM</span>
+                </div>
+
+                <!-- Card 2: Full Stack -->
+                <div class="expertise-card reveal" id="card-fullstack">
+                    <div class="card-glow"></div>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                            <line x1="8" y1="21" x2="16" y2="21" />
+                            <line x1="12" y1="17" x2="12" y2="21" />
+                            <path d="M6 8l-2 2 2 2M18 8l2 2-2 2" />
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Full Stack Development</h3>
+                    <p class="card-desc">Architecting robust, scalable web layers using modern frontend technologies
+                        combined with high-throughput Spring Boot backends and secure relational systems.</p>
+                    <span class="card-tags">Java • Spring Boot • HTML • CSS • JS</span>
+                </div>
+
+                <!-- Card 3: Data Systems -->
+                <div class="expertise-card reveal" id="card-data">
+                    <div class="card-glow"></div>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <ellipse cx="12" cy="5" rx="9" ry="3" />
+                            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+                            <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3" />
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Data & Business Systems</h3>
+                    <p class="card-desc">Unlocking patterns from raw logs, orchestrating ETL processes, building Power
+                        BI systems, and optimizing business-oriented SQL operations.</p>
+                    <span class="card-tags">SQL • Power BI • Analytics • ETL Workflows</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Projects (Apple-Style Product Pages) -->
+    <section id="projects" class="projects-section">
+        <!-- Project 1: HotelHub -->
+        <div class="project-page" id="project-hotelhub">
+            <div class="project-container">
+                <div class="project-details reveal">
+                    <span class="project-category">Full Stack Java Web Application</span>
+                    <h2 class="project-title">🏨 HotelHub</h2>
+                    <h3 class="project-headline">Smart Hotel Reservation System</h3>
+                    <p class="project-lead-line">A high-performance booking platform built using Java and Spring Boot
+                        with a sleek, responsive HTML5/CSS3 frontend.</p>
+                    <ul class="project-tech-bullets">
+                        <li>
+                            <span class="bullet-accent">✓</span>
+                            <div class="bullet-text"><strong>Java + Spring Boot architecture</strong> combined with
+                                clean HTML, CSS, and interactive JavaScript for an ultra-responsive user experience.
+                            </div>
+                        </li>
+                        <li>
+                            <span class="bullet-accent">✓</span>
+                            <div class="bullet-text"><strong>PostgreSQL relational system</strong> fully normalized and
+                                indexed for heavy concurrent booking transactions.</div>
+                        </li>
+                        <li>
+                            <span class="bullet-accent">✓</span>
+                            <div class="bullet-text"><strong>Secure API-driven backend</strong> securing user roles,
+                                checkout endpoints, and inventory counts.</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Live Interactive Mock UI: Reservation Matrix -->
+                <div class="project-mockup reveal">
+                    <div class="mock-browser-frame">
+                        <div class="browser-header">
+                            <div class="browser-dots">
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                            <div class="browser-address">hotelhub.lishap.dev/dashboard</div>
+                        </div>
+                        <div class="hotelhub-dashboard">
+                            <div class="dash-sidebar">
+                                <div class="sidebar-logo">🏨 HotelHub</div>
+                                <div class="sidebar-menu">
+                                    <div class="menu-item active">Grid View</div>
+                                    <div class="menu-item">Bookings</div>
+                                    <div class="menu-item">Analytics</div>
+                                </div>
+                            </div>
+                            <div class="dash-main">
+                                <div class="main-header">
+                                    <h4>Room Availability Matrix</h4>
+                                    <span class="dash-badge live">Live Demo</span>
+                                </div>
+                                <p class="dash-instruction">Click on a grid room to change status between
+                                    <strong>Available</strong>, <strong>Booked</strong>, or <strong>Cleaning</strong>:
+                                </p>
+                                <div class="room-grid" id="hotelhub-grid">
+                                    <!-- Populated dynamically by script.js -->
+                                </div>
+                                <div class="grid-legend">
+                                    <span class="legend-item"><span class="color-dot available"></span> Available</span>
+                                    <span class="legend-item"><span class="color-dot booked"></span> Booked</span>
+                                    <span class="legend-item"><span class="color-dot cleaning"></span> Cleaning</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project 2: UPI Fraud Detection System -->
+        <div class="project-page" id="project-fraud">
+            <div class="project-container reversed">
+                <div class="project-details reveal">
+                    <span class="project-category">AI-Powered Transaction Engine</span>
+                    <h2 class="project-title">💳 UPI Fraud Detection</h2>
+                    <h3 class="project-headline">AI-Powered Fraud Detection Engine</h3>
+                    <p class="project-lead-line">Detecting fraudulent transactions in high-velocity UPI streams using
+                        hybrid deep learning and NLP transaction analysis.</p>
+                    <ul class="project-tech-bullets">
+                        <li>
+                            <span class="bullet-accent">✓</span>
+                            <div class="bullet-text"><strong>XGBoost + LSTM hybrid model</strong> capturing both static
+                                metadata weights and sequential behavioral trends.</div>
+                        </li>
+                        <li>
+                            <span class="bullet-accent">✓</span>
+                            <div class="bullet-text"><strong>NLP-based transaction analysis</strong> identifying
+                                malicious intent and phishing text patterns in payment remarks.</div>
+                        </li>
+                        <li>
+                            <span class="bullet-accent">✓</span>
+                            <div class="bullet-text"><strong>Firebase real-time logging</strong> pushing instant
+                                security logs to user terminals immediately upon flag events.</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Live Interactive Mock UI: AI Fraud Terminal -->
+                <div class="project-mockup reveal">
+                    <div class="mock-browser-frame">
+                        <div class="browser-header">
+                            <div class="browser-dots">
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                            <div class="browser-address">ai-scanner.lishap.dev/realtime</div>
+                        </div>
+                        <div class="fraud-dashboard">
+                            <div class="fraud-header">
+                                <div class="fraud-title">
+                                    <span class="pulse-red"></span>
+                                    <span>UPI Transaction Stream Monitor</span>
+                                </div>
+                                <div class="fraud-metrics">
+                                    <div class="metric-box">
+                                        <div class="metric-val" id="count-scanned">0</div>
+                                        <div class="metric-lbl">Scanned</div>
+                                    </div>
+                                    <div class="metric-box red-metric">
+                                        <div class="metric-val" id="count-flagged">0</div>
+                                        <div class="metric-lbl">Flagged</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="fraud-terminal">
+                                <div class="terminal-bar">
+                                    <span>AI Engine Status: ACTIVE</span>
+                                    <span>Model Accuracy: 98.4%</span>
+                                </div>
+                                <div class="terminal-content" id="fraud-terminal-logs">
+                                    <!-- Dynamic scrolling logs from script.js -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Experience (Minimal timeline) -->
+    <section id="experience" class="experience-section">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-subtitle">Career Path</span>
+                <h2 class="section-title">Professional Experience</h2>
+            </div>
+
+            <div class="timeline-container">
+                <!-- Timeline Item 1 -->
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Dec 2025 — May 2026</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-company">Flipflex Customized Software LLP</h3>
+                        <h4 class="timeline-role">Software Developer Intern</h4>
+                        <ul class="timeline-lines">
+                            <li>→ Built and optimized robust data extraction pipelines, reducing latency.</li>
+                            <li>→ Configured and managed AWS cloud infrastructure for microservices.</li>
+                            <li>→ Streamlined developer environments and builds using Docker workflows.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">July 2025</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-company">MK Trainings</h3>
+                        <h4 class="timeline-role">Web Development Intern</h4>
+                        <ul class="timeline-lines">
+                            <li>→ Engineered a full-stack Spring Boot booking application from ground up.</li>
+                            <li>→ Implemented highly secure authentication layers and RESTful APIs.</li>
+                            <li>→ Designed responsive frontend interfaces using modular layouts.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: Final Section (Apple-style closing) -->
+    <section id="contact" class="contact-section">
+        <div class="section-container">
+            <div class="contact-content reveal">
+                <span class="contact-sup">Next Steps</span>
+                <h2 class="contact-headline">Let’s build something meaningful.</h2>
+                <p class="contact-text">Currently seeking software engineering, machine learning engineering, and
+                    technical analyst opportunities. If you're looking for a developer who builds systems with logic,
+                    design, and intelligence, let's connect.</p>
+
+                <div class="contact-buttons">
+                    <a href="mailto:lishap.engineer@gmail.com" class="contact-btn email-btn">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                            <polyline points="22,6 12,13 2,6" />
+                        </svg>
+                        Email Me
+                    </a>
+                    <a href="https://www.linkedin.com/in/lisha-p-98b810329/" target="_blank" rel="noopener noreferrer"
+                        class="contact-btn linkedin-btn">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                            <rect x="2" y="9" width="4" height="12" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg>
+                        LinkedIn
+                    </a>
+                    <a href="https://github.com/lisha-p" target="_blank" rel="noopener noreferrer"
+                        class="contact-btn github-btn">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                        </svg>
+                        GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-container">
+                <p class="footer-copy">© 2026 Lisha P. All rights reserved.</p>
+                <p class="footer-credits">Designed with premium Apple minimalism.</p>
+            </div>
+        </footer>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
