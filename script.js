@@ -248,78 +248,73 @@ document.addEventListener('DOMContentLoaded', () => {
 
         animateParticles();
 
-        // Handle video play/pause toggle and robust autoplay synchronization
+        // Video playback — keep canvas visible until the video is actually playing
         if (videoContainer && videoEl) {
-            // Hide canvas immediately so the video is visible
-            if (canvas) {
-                canvas.style.display = 'none';
-            }
-            if (animationId) {
-                cancelAnimationFrame(animationId);
-                animationId = null;
-            }
-
-            // Start the video muted (browsers require this for autoplay)
-            videoEl.muted = true;
-            videoEl.play().catch(err => {
-                console.log("Autoplay failed:", err);
-                // If autoplay fails entirely, show canvas as fallback
-                if (canvas) {
-                    canvas.style.display = 'block';
-                    if (!animationId) animateParticles();
+            const hideCanvasAndStopAnimation = () => {
+                if (canvas) canvas.style.display = 'none';
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                    animationId = null;
                 }
-            });
+            };
 
-            // On first user interaction, unmute audio
-            const handleFirstInteraction = () => {
+            const showCanvasFallback = () => {
+                if (canvas) canvas.style.display = 'block';
+                if (!animationId) animateParticles();
+            };
+
+            const enableAudio = () => {
                 videoEl.muted = false;
                 videoEl.volume = 1;
-                if (videoEl.paused) {
-                    videoEl.play().catch(err => {
-                        console.warn('Play after interaction failed:', err);
-                    });
-                }
-                // Clean up listeners
-                ['click', 'touchstart', 'scroll', 'keydown', 'mousemove'].forEach(event => {
-                    document.removeEventListener(event, handleFirstInteraction);
-                });
-                // Hide the overlay prompt
                 if (overlay) {
                     overlay.style.opacity = '0';
                     overlay.style.pointerEvents = 'none';
                 }
             };
 
-            ['click', 'touchstart', 'scroll', 'keydown', 'mousemove'].forEach(event => {
+            const tryPlay = () => {
+                videoEl.muted = true;
+                return videoEl.play().catch((err) => {
+                    console.warn('Video autoplay failed:', err);
+                    showCanvasFallback();
+                });
+            };
+
+            videoEl.addEventListener('playing', hideCanvasAndStopAnimation);
+            videoEl.addEventListener('error', showCanvasFallback);
+
+            if (videoEl.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+                tryPlay();
+            } else {
+                videoEl.addEventListener('canplay', () => tryPlay(), { once: true });
+            }
+
+            // Tap/click the video frame to play or unmute
+            videoContainer.addEventListener('click', () => {
+                enableAudio();
+                if (videoEl.paused) {
+                    videoEl.play().catch((err) => {
+                        console.warn('Play on click failed:', err);
+                    });
+                }
+            });
+
+            // Unmute on first page interaction (scroll, key, etc.)
+            const handleFirstInteraction = () => {
+                enableAudio();
+                if (videoEl.paused) tryPlay();
+            };
+
+            ['touchstart', 'scroll', 'keydown'].forEach((event) => {
                 document.addEventListener(event, handleFirstInteraction, { once: true, passive: true });
             });
 
-            // Show a friendly prompt on the overlay until user interacts
             if (overlay) {
                 const prompt = document.createElement('div');
                 prompt.className = 'overlay-text';
-                prompt.textContent = '🔊 Click anywhere to enable audio';
+                prompt.textContent = '🔊 Tap video to enable audio';
                 overlay.appendChild(prompt);
             }
-
-            // When video ends, show replay option
-            videoEl.addEventListener('ended', () => {
-                if (overlay) {
-                    overlay.style.opacity = '1';
-                    overlay.style.pointerEvents = 'auto';
-                    const overlayText = overlay.querySelector('.overlay-text');
-                    if (overlayText) {
-                        overlayText.textContent = "▶ Replay Intro";
-                        overlayText.style.cursor = 'pointer';
-                        overlayText.addEventListener('click', () => {
-                            videoEl.currentTime = 0;
-                            videoEl.play();
-                            overlay.style.opacity = '0';
-                            overlay.style.pointerEvents = 'none';
-                        });
-                    }
-                }
-            });
         }
     }
 
