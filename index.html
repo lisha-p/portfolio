@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lisha P — Portfolio</title>
     <meta name="description"
-        content="Portfolio of Lisha P, Computer Science Engineer, AI Explorer, and Full-Stack Developer. Building intelligent systems, scalable web applications, and data-driven products.">
+        content="Portfolio of Lisha P, Computer Science Graduate and aspiring Software Developer. Open to entry-level opportunities in full-stack development and software engineering.">
     <!-- Google Fonts: Outfit for sleek product headings, Inter for high-quality body copy -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,14 @@
 </head>
 
 <body>
-    <!-- Premium Frosted Navigation Bar -->
+    <canvas id="bg-3d-canvas" class="bg-3d-canvas" aria-hidden="true"></canvas>
+    <div class="floating-orbs" aria-hidden="true">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Navigation -->
     <nav id="navbar" class="navbar">
         <div class="nav-container">
             <a href="#hero" class="nav-brand">Lisha P</a>
@@ -40,10 +47,10 @@
         <div class="hero-container">
             <!-- Left/Top Content Block -->
             <div class="hero-content">
-                <span class="hero-tagline reveal">Computer Science Engineer • AI Explorer • Full-Stack Developer</span>
+                <span class="hero-tagline reveal">Computer Science Graduate · Aspiring Software Developer</span>
                 <h1 class="hero-title reveal">Lisha P</h1>
-                <p class="hero-subtitle reveal">Building intelligent systems, scalable web applications, and data-driven
-                    digital products.</p>
+                <p class="hero-subtitle reveal">Recent graduate passionate about building clean, scalable applications
+                    and eager to contribute to impactful engineering teams.</p>
                 <div class="hero-actions reveal">
                     <a href="#projects" class="btn btn-primary">View Projects</a>
                     <a href="#contact" class="btn btn-secondary">Contact</a>
@@ -51,7 +58,7 @@
             </div>
 
             <!-- Right/Bottom Product Demo Trailer -->
-            <div class="hero-media-wrapper reveal">
+            <div class="hero-media-wrapper reveal tilt-3d" data-tilt-intensity="12">
                 <div class="product-trailer-frame">
                     <div class="video-container" id="video-container">
                         <!-- Generative Canvas visualizer acting as high-tech particle stream -->
@@ -79,15 +86,16 @@
         <div class="section-container">
             <div class="about-grid">
                 <div class="about-headline reveal">
-                    <span class="section-subtitle">The Philosophy</span>
-                    <h2 class="section-title">Design. Logic. Intelligence.</h2>
+                    <span class="section-subtitle">About Me</span>
+                    <h2 class="section-title">Focused. Curious. Ready to Build.</h2>
                 </div>
                 <div class="about-content">
-                    <p class="about-line reveal">I build software systems that combine logic, design, and intelligence.
-                    </p>
-                    <p class="about-line reveal">My focus is AI systems, full-stack development, and business-driven
-                        applications.</p>
-                    <p class="about-line reveal">I enjoy turning complex problems into simple, usable products.</p>
+                    <p class="about-line reveal">I am a Computer Science graduate with hands-on experience through
+                        internships and academic projects.</p>
+                    <p class="about-line reveal">I work across full-stack development, databases, and applied machine
+                        learning with a strong foundation in Java and Spring Boot.</p>
+                    <p class="about-line reveal">I am motivated to learn quickly, collaborate with teams, and deliver
+                        reliable software in professional environments.</p>
                 </div>
             </div>
         </div>
@@ -102,7 +110,7 @@
             </div>
             <div class="expertise-grid">
                 <!-- Card 1: AI & ML -->
-                <div class="expertise-card reveal" id="card-ai">
+                <div class="expertise-card reveal tilt-3d" id="card-ai">
                     <div class="card-glow"></div>
                     <div class="card-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
@@ -119,7 +127,7 @@
                 </div>
 
                 <!-- Card 2: Full Stack -->
-                <div class="expertise-card reveal" id="card-fullstack">
+                <div class="expertise-card reveal tilt-3d" id="card-fullstack">
                     <div class="card-glow"></div>
                     <div class="card-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
@@ -137,7 +145,7 @@
                 </div>
 
                 <!-- Card 3: Data Systems -->
-                <div class="expertise-card reveal" id="card-data">
+                <div class="expertise-card reveal tilt-3d" id="card-data">
                     <div class="card-glow"></div>
                     <div class="card-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
@@ -163,24 +171,24 @@
             <div class="project-container">
                 <div class="project-details reveal">
                     <span class="project-category">Full Stack Java Web Application</span>
-                    <h2 class="project-title">🏨 HotelHub</h2>
+                    <h2 class="project-title">HotelHub</h2>
                     <h3 class="project-headline">Smart Hotel Reservation System</h3>
                     <p class="project-lead-line">A high-performance booking platform built using Java and Spring Boot
                         with a sleek, responsive HTML5/CSS3 frontend.</p>
                     <ul class="project-tech-bullets">
                         <li>
-                            <span class="bullet-accent">✓</span>
+                            <span class="bullet-accent" aria-hidden="true"></span>
                             <div class="bullet-text"><strong>Java + Spring Boot architecture</strong> combined with
                                 clean HTML, CSS, and interactive JavaScript for an ultra-responsive user experience.
                             </div>
                         </li>
                         <li>
-                            <span class="bullet-accent">✓</span>
+                            <span class="bullet-accent" aria-hidden="true"></span>
                             <div class="bullet-text"><strong>PostgreSQL relational system</strong> fully normalized and
                                 indexed for heavy concurrent booking transactions.</div>
                         </li>
                         <li>
-                            <span class="bullet-accent">✓</span>
+                            <span class="bullet-accent" aria-hidden="true"></span>
                             <div class="bullet-text"><strong>Secure API-driven backend</strong> securing user roles,
                                 checkout endpoints, and inventory counts.</div>
                         </li>
@@ -200,7 +208,7 @@
                         </div>
                         <div class="hotelhub-dashboard">
                             <div class="dash-sidebar">
-                                <div class="sidebar-logo">🏨 HotelHub</div>
+                                <div class="sidebar-logo">HotelHub</div>
                                 <div class="sidebar-menu">
                                     <div class="menu-item active">Grid View</div>
                                     <div class="menu-item">Bookings</div>
@@ -235,23 +243,23 @@
             <div class="project-container reversed">
                 <div class="project-details reveal">
                     <span class="project-category">AI-Powered Transaction Engine</span>
-                    <h2 class="project-title">💳 UPI Fraud Detection</h2>
+                    <h2 class="project-title">UPI Fraud Detection</h2>
                     <h3 class="project-headline">AI-Powered Fraud Detection Engine</h3>
                     <p class="project-lead-line">Detecting fraudulent transactions in high-velocity UPI streams using
                         hybrid deep learning and NLP transaction analysis.</p>
                     <ul class="project-tech-bullets">
                         <li>
-                            <span class="bullet-accent">✓</span>
+                            <span class="bullet-accent" aria-hidden="true"></span>
                             <div class="bullet-text"><strong>XGBoost + LSTM hybrid model</strong> capturing both static
                                 metadata weights and sequential behavioral trends.</div>
                         </li>
                         <li>
-                            <span class="bullet-accent">✓</span>
+                            <span class="bullet-accent" aria-hidden="true"></span>
                             <div class="bullet-text"><strong>NLP-based transaction analysis</strong> identifying
                                 malicious intent and phishing text patterns in payment remarks.</div>
                         </li>
                         <li>
-                            <span class="bullet-accent">✓</span>
+                            <span class="bullet-accent" aria-hidden="true"></span>
                             <div class="bullet-text"><strong>Firebase real-time logging</strong> pushing instant
                                 security logs to user terminals immediately upon flag events.</div>
                         </li>
@@ -319,9 +327,9 @@
                         <h3 class="timeline-company">Flipflex Customized Software LLP</h3>
                         <h4 class="timeline-role">Software Developer Intern</h4>
                         <ul class="timeline-lines">
-                            <li>→ Built and optimized robust data extraction pipelines, reducing latency.</li>
-                            <li>→ Configured and managed AWS cloud infrastructure for microservices.</li>
-                            <li>→ Streamlined developer environments and builds using Docker workflows.</li>
+                            <li>Built and optimized robust data extraction pipelines, reducing latency.</li>
+                            <li>Configured and managed AWS cloud infrastructure for microservices.</li>
+                            <li>Streamlined developer environments and builds using Docker workflows.</li>
                         </ul>
                     </div>
                 </div>
@@ -334,9 +342,9 @@
                         <h3 class="timeline-company">MK Trainings</h3>
                         <h4 class="timeline-role">Web Development Intern</h4>
                         <ul class="timeline-lines">
-                            <li>→ Engineered a full-stack Spring Boot booking application from ground up.</li>
-                            <li>→ Implemented highly secure authentication layers and RESTful APIs.</li>
-                            <li>→ Designed responsive frontend interfaces using modular layouts.</li>
+                            <li>Engineered a full-stack Spring Boot booking application from ground up.</li>
+                            <li>Implemented highly secure authentication layers and RESTful APIs.</li>
+                            <li>Designed responsive frontend interfaces using modular layouts.</li>
                         </ul>
                     </div>
                 </div>
@@ -349,10 +357,10 @@
         <div class="section-container">
             <div class="contact-content reveal">
                 <span class="contact-sup">Next Steps</span>
-                <h2 class="contact-headline">Let’s build something meaningful.</h2>
-                <p class="contact-text">Currently seeking software engineering, machine learning engineering, and
-                    technical analyst opportunities. If you're looking for a developer who builds systems with logic,
-                    design, and intelligence, let's connect.</p>
+                <h2 class="contact-headline">Ready to contribute and grow.</h2>
+                <p class="contact-text">Open to entry-level software engineering and development roles. I bring strong
+                    fundamentals, internship experience, and a commitment to continuous learning. I would welcome the
+                    opportunity to discuss how I can add value to your team.</p>
 
                 <div class="contact-buttons">
                     <a href="mailto:lishap.engineer@gmail.com" class="contact-btn email-btn">
@@ -389,7 +397,7 @@
         <footer class="footer">
             <div class="footer-container">
                 <p class="footer-copy">© 2026 Lisha P. All rights reserved.</p>
-                <p class="footer-credits">Designed with premium Apple minimalism.</p>
+                <p class="footer-credits">Professional portfolio — Lisha P</p>
             </div>
         </footer>
     </section>

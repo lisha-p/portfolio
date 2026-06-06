@@ -1,9 +1,155 @@
 /* ==========================================================================
-   PREMIUM PORTFOLIO INTERACTIVE ENGINE
-   Lisha P — Apple-Inspired Portfolio
+   PORTFOLIO INTERACTIVE ENGINE
+   Lisha P — Professional 3D Portfolio
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    /* -----------------------------------------------------------------------
+       0. 3D BACKGROUND CANVAS — Floating geometric shapes
+    ----------------------------------------------------------------------- */
+    const bgCanvas = document.getElementById('bg-3d-canvas');
+
+    if (bgCanvas) {
+        const bgCtx = bgCanvas.getContext('2d');
+        let bgAnimId;
+        let shapes = [];
+        let mouseX = 0;
+        let mouseY = 0;
+
+        const resizeBg = () => {
+            bgCanvas.width = window.innerWidth;
+            bgCanvas.height = window.innerHeight;
+        };
+
+        resizeBg();
+        window.addEventListener('resize', resizeBg);
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+            mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+        }, { passive: true });
+
+        const shapeTypes = ['cube', 'ring', 'triangle'];
+        const palette = [
+            { r: 124, g: 92, b: 252 },
+            { r: 79, g: 124, b: 255 },
+            { r: 56, g: 189, b: 248 },
+        ];
+
+        for (let i = 0; i < 18; i++) {
+            shapes.push({
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                z: Math.random() * 400 + 100,
+                size: Math.random() * 40 + 20,
+                rot: Math.random() * Math.PI * 2,
+                rotSpeed: (Math.random() - 0.5) * 0.008,
+                driftX: (Math.random() - 0.5) * 0.3,
+                driftY: (Math.random() - 0.5) * 0.2,
+                type: shapeTypes[Math.floor(Math.random() * shapeTypes.length)],
+                color: palette[Math.floor(Math.random() * palette.length)],
+            });
+        }
+
+        function drawShape(s, px, py) {
+            const scale = 300 / (s.z + 300);
+            const sx = s.x + px * s.z * 0.15;
+            const sy = s.y + py * s.z * 0.15;
+            const sz = s.size * scale;
+
+            bgCtx.save();
+            bgCtx.translate(sx, sy);
+            bgCtx.rotate(s.rot);
+            bgCtx.strokeStyle = `rgba(${s.color.r}, ${s.color.g}, ${s.color.b}, ${0.12 + scale * 0.15})`;
+            bgCtx.lineWidth = 1.2 * scale;
+
+            if (s.type === 'cube') {
+                bgCtx.strokeRect(-sz / 2, -sz / 2, sz, sz);
+                bgCtx.beginPath();
+                bgCtx.moveTo(-sz / 2, -sz / 2);
+                bgCtx.lineTo(-sz / 4, -sz / 2 - sz / 3);
+                bgCtx.lineTo(sz / 4, -sz / 2 - sz / 3);
+                bgCtx.lineTo(sz / 2, -sz / 2);
+                bgCtx.stroke();
+                bgCtx.beginPath();
+                bgCtx.moveTo(sz / 2, -sz / 2);
+                bgCtx.lineTo(sz / 4, -sz / 2 - sz / 3);
+                bgCtx.lineTo(sz / 4, sz / 2 - sz / 3);
+                bgCtx.lineTo(sz / 2, sz / 2);
+                bgCtx.stroke();
+            } else if (s.type === 'ring') {
+                bgCtx.beginPath();
+                bgCtx.arc(0, 0, sz / 2, 0, Math.PI * 2);
+                bgCtx.stroke();
+            } else {
+                bgCtx.beginPath();
+                bgCtx.moveTo(0, -sz / 2);
+                bgCtx.lineTo(sz / 2, sz / 2);
+                bgCtx.lineTo(-sz / 2, sz / 2);
+                bgCtx.closePath();
+                bgCtx.stroke();
+            }
+
+            bgCtx.restore();
+        }
+
+        function animateBg() {
+            bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+
+            shapes.sort((a, b) => b.z - a.z);
+            shapes.forEach((s) => {
+                s.x += s.driftX;
+                s.y += s.driftY;
+                s.rot += s.rotSpeed;
+
+                if (s.x < -80) s.x = bgCanvas.width + 80;
+                if (s.x > bgCanvas.width + 80) s.x = -80;
+                if (s.y < -80) s.y = bgCanvas.height + 80;
+                if (s.y > bgCanvas.height + 80) s.y = -80;
+
+                drawShape(s, mouseX, mouseY);
+            });
+
+            bgAnimId = requestAnimationFrame(animateBg);
+        }
+
+        animateBg();
+    }
+
+
+    /* -----------------------------------------------------------------------
+       0b. 3D TILT ON CARDS & HERO MEDIA
+    ----------------------------------------------------------------------- */
+    document.querySelectorAll('.tilt-3d').forEach((el) => {
+        const intensity = parseFloat(el.dataset.tiltIntensity) || 8;
+
+        el.addEventListener('mousemove', (e) => {
+            const rect = el.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            el.style.transform = `perspective(900px) rotateY(${x * intensity}deg) rotateX(${-y * intensity}deg) translateZ(10px)`;
+        });
+
+        el.addEventListener('mouseleave', () => {
+            el.style.transform = '';
+        });
+    });
+
+
+    /* -----------------------------------------------------------------------
+       0c. SCROLL PARALLAX FOR SECTION HEADERS
+    ----------------------------------------------------------------------- */
+    const parallaxEls = document.querySelectorAll('.section-header, .hero-content');
+
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        parallaxEls.forEach((el, i) => {
+            const offset = (scrollY - el.offsetTop) * 0.04;
+            el.style.transform = `translate3d(0, ${offset * (i % 2 === 0 ? 1 : -0.5)}px, 0)`;
+        });
+    }, { passive: true });
+
 
     /* -----------------------------------------------------------------------
        1. SCROLL REVEAL (Intersection Observer)
@@ -155,10 +301,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Assign color from palette
                 const colors = [
-                    { r: 140, g: 82, b: 255 },   // accent-purple
-                    { r: 79, g: 124, b: 255 },    // accent-blue
-                    { r: 0, g: 242, b: 254 },     // cyan accent
-                    { r: 255, g: 255, b: 255 },   // white
+                    { r: 124, g: 92, b: 252 },
+                    { r: 79, g: 124, b: 255 },
+                    { r: 56, g: 189, b: 248 },
+                    { r: 160, g: 174, b: 220 },
                 ];
                 this.color = colors[Math.floor(Math.random() * colors.length)];
             }
@@ -231,8 +377,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 canvas.width * 0.5, canvas.height * 0.5, 0,
                 canvas.width * 0.5, canvas.height * 0.5, canvas.width * 0.4
             );
-            centerGlow.addColorStop(0, 'rgba(140, 82, 255, 0.05)');
-            centerGlow.addColorStop(0.5, 'rgba(79, 124, 255, 0.02)');
+            centerGlow.addColorStop(0, 'rgba(124, 92, 252, 0.08)');
+            centerGlow.addColorStop(0.5, 'rgba(79, 124, 255, 0.04)');
             centerGlow.addColorStop(1, 'transparent');
             ctx.fillStyle = centerGlow;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -312,7 +458,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (overlay) {
                 const prompt = document.createElement('div');
                 prompt.className = 'overlay-text';
-                prompt.textContent = '🔊 Tap video to enable audio';
+                prompt.textContent = 'Tap video to enable audio';
                 overlay.appendChild(prompt);
             }
         }
@@ -440,10 +586,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 flagged++;
                 if (countFlagged) countFlagged.textContent = flagged;
                 row.classList.add('fraud-flag');
-                row.textContent = `[${timestamp}] ⚠ FLAGGED | ${txId} | ₹${amount} | ${sender} → ${receiver} | "${remark}" | Confidence: ${(Math.random() * 8 + 92).toFixed(1)}%`;
+                row.textContent = `[${timestamp}] FLAGGED | ${txId} | INR ${amount} | ${sender} -> ${receiver} | "${remark}" | Confidence: ${(Math.random() * 8 + 92).toFixed(1)}%`;
             } else {
                 row.classList.add('safe-flag');
-                row.textContent = `[${timestamp}] ✓ SAFE   | ${txId} | ₹${amount} | ${sender} → ${receiver} | "${remark}"`;
+                row.textContent = `[${timestamp}] SAFE   | ${txId} | INR ${amount} | ${sender} -> ${receiver} | "${remark}"`;
             }
 
             terminalLogs.appendChild(row);
@@ -481,7 +627,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 navLinksAll.forEach(link => {
                     link.style.color = '';
                     if (link.getAttribute('href') === `#${id}`) {
-                        link.style.color = '#ffffff';
+                        link.style.color = '#7c5cfc';
                     }
                 });
             }

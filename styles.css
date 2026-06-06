@@ -1,28 +1,33 @@
 /* ==========================================================================
-   PREMIUM APPLE-INSPIRED DESIGN SYSTEM
+   PROFESSIONAL 3D PORTFOLIO DESIGN SYSTEM
    Lisha P Portfolio Stylesheet
    ========================================================================== */
 
 /* --- CSS Variables & Design Tokens --- */
 :root {
-    --bg-color: #0a0a0a;
-    --bg-darker: #050505;
-    --text-primary: #ffffff;
-    --text-secondary: #a1a1a6;
-    --text-muted: #86868b;
-    --accent-purple: #8c52ff;
+    --bg-color: #f4f7ff;
+    --bg-darker: #e9effa;
+    --bg-gradient: linear-gradient(145deg, #f8faff 0%, #eef3ff 30%, #f3f0ff 65%, #faf9ff 100%);
+    --text-primary: #1a1f36;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+    --accent-purple: #7c5cfc;
     --accent-blue: #4f7cff;
-    --accent-gradient: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
-    --card-bg: rgba(255, 255, 255, 0.03);
-    --card-bg-hover: rgba(255, 255, 255, 0.06);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-border-hover: rgba(255, 255, 255, 0.15);
+    --accent-cyan: #38bdf8;
+    --accent-gradient: linear-gradient(135deg, #7c5cfc 0%, #4f7cff 50%, #38bdf8 100%);
+    --card-bg: rgba(255, 255, 255, 0.72);
+    --card-bg-hover: rgba(255, 255, 255, 0.92);
+    --glass-border: rgba(255, 255, 255, 0.9);
+    --glass-border-hover: rgba(124, 92, 252, 0.22);
+    --shadow-soft: 0 20px 60px rgba(79, 124, 255, 0.1);
+    --shadow-3d: 0 30px 60px -15px rgba(124, 92, 252, 0.18);
     --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     --transition-bounce: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
     --container-width: 1200px;
     --nav-height: 72px;
+    --perspective: 1200px;
 }
 
 /* --- Base & Reset Styles --- */
@@ -34,7 +39,7 @@
 
 html {
     scroll-behavior: smooth;
-    background-color: var(--bg-color);
+    background: var(--bg-gradient);
     color: var(--text-primary);
     font-family: var(--font-body);
     font-size: 16px;
@@ -45,7 +50,75 @@ html {
 
 body {
     overflow-x: hidden;
-    background-color: var(--bg-color);
+    background: var(--bg-gradient);
+    position: relative;
+    min-height: 100vh;
+}
+
+/* --- 3D Animated Background --- */
+.bg-3d-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.55;
+}
+
+.floating-orbs {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: orbFloat 18s ease-in-out infinite;
+}
+
+.orb-1 {
+    width: 420px;
+    height: 420px;
+    top: -8%;
+    right: -5%;
+    background: radial-gradient(circle, rgba(124, 92, 252, 0.35), transparent 70%);
+    animation-delay: 0s;
+}
+
+.orb-2 {
+    width: 360px;
+    height: 360px;
+    bottom: 10%;
+    left: -8%;
+    background: radial-gradient(circle, rgba(79, 124, 255, 0.3), transparent 70%);
+    animation-delay: -6s;
+}
+
+.orb-3 {
+    width: 280px;
+    height: 280px;
+    top: 45%;
+    left: 40%;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.25), transparent 70%);
+    animation-delay: -12s;
+}
+
+@keyframes orbFloat {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    33% { transform: translate3d(30px, -40px, 0) scale(1.08); }
+    66% { transform: translate3d(-25px, 25px, 0) scale(0.95); }
+}
+
+.navbar,
+section,
+footer {
+    position: relative;
+    z-index: 1;
 }
 
 /* --- Scrollbar Customization --- */
@@ -56,12 +129,12 @@ body {
     background: var(--bg-darker);
 }
 ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(124, 92, 252, 0.25);
     border-radius: 5px;
     border: 2px solid var(--bg-darker);
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(124, 92, 252, 0.4);
 }
 
 /* --- Layout Containers --- */
@@ -83,9 +156,9 @@ h1, h2, h3, h4, h5, h6 {
 
 /* --- Section Global Structure --- */
 section {
-    padding: 10rem 0; /* Breathing room heavy */
+    padding: 10rem 0;
     position: relative;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid rgba(124, 92, 252, 0.06);
 }
 
 .section-header {
@@ -97,9 +170,10 @@ section {
     font-size: 3rem;
     font-weight: 800;
     margin-top: 0.5rem;
-    background: linear-gradient(to right, #ffffff, #86868b);
+    background: linear-gradient(135deg, #1a1f36 20%, #4f7cff 80%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .section-subtitle {
@@ -132,12 +206,12 @@ section {
     background: var(--accent-gradient);
     color: #ffffff;
     border: none;
-    box-shadow: 0 4px 20px rgba(140, 82, 255, 0.3);
+    box-shadow: 0 8px 28px rgba(124, 92, 252, 0.28);
 }
 
 .btn-primary:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 25px rgba(140, 82, 255, 0.45);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 14px 36px rgba(124, 92, 252, 0.38);
 }
 
 .btn-primary:active {
@@ -145,32 +219,50 @@ section {
 }
 
 .btn-secondary {
-    background: rgba(255, 255, 255, 0.06);
-    color: #ffffff;
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.75);
+    color: var(--text-primary);
+    border: 1px solid rgba(124, 92, 252, 0.15);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-soft);
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.25);
-    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(124, 92, 252, 0.3);
+    transform: translateY(-3px) scale(1.03);
 }
 
 .btn-secondary:active {
     transform: scale(0.98);
 }
 
-/* --- Apple-Style Scroll Reveals --- */
+/* --- Scroll Reveals & 3D Motion --- */
 .reveal {
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(40px) rotateX(8deg);
+    transform-origin: center top;
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.active {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) rotateX(0);
+}
+
+.tilt-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.15s ease-out, box-shadow 0.4s ease;
+    will-change: transform;
+}
+
+.expertise-card.tilt-3d {
+    perspective: var(--perspective);
+}
+
+@keyframes floatY {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
 }
 
 /* --- 1. Frosted Glass Navbar --- */
@@ -180,16 +272,18 @@ section {
     left: 0;
     width: 100%;
     height: var(--nav-height);
-    background: rgba(10, 10, 10, 0.75);
+    background: rgba(255, 255, 255, 0.72);
     backdrop-filter: saturate(180%) blur(20px);
-    border-bottom: 1px solid var(--glass-border);
+    border-bottom: 1px solid rgba(124, 92, 252, 0.1);
     z-index: 1000;
     transition: var(--transition-smooth);
+    box-shadow: 0 4px 30px rgba(79, 124, 255, 0.06);
 }
 
 .navbar.scrolled {
-    background: rgba(5, 5, 5, 0.85);
-    border-bottom-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.88);
+    border-bottom-color: rgba(124, 92, 252, 0.15);
+    box-shadow: 0 8px 40px rgba(79, 124, 255, 0.1);
 }
 
 .nav-container {
@@ -209,9 +303,10 @@ section {
     color: var(--text-primary);
     text-decoration: none;
     letter-spacing: -0.02em;
-    background: linear-gradient(135deg, #ffffff, #a1a1a6);
+    background: var(--accent-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
     transition: var(--transition-smooth);
 }
 
@@ -235,7 +330,7 @@ section {
 }
 
 .nav-link:hover {
-    color: var(--text-primary);
+    color: var(--accent-purple);
 }
 
 /* Mobile Nav Toggle */
@@ -265,8 +360,7 @@ section {
     justify-content: center;
     position: relative;
     overflow: hidden;
-    background: radial-gradient(circle at 75% 25%, rgba(140, 82, 255, 0.08) 0%, transparent 60%),
-                radial-gradient(circle at 10% 85%, rgba(79, 124, 255, 0.08) 0%, transparent 60%);
+    background: transparent;
 }
 
 .hero-container {
@@ -301,9 +395,10 @@ section {
     letter-spacing: -0.04em;
     line-height: 0.95;
     margin-bottom: 1.5rem;
-    background: linear-gradient(135deg, #ffffff 30%, #a1a1a6 100%);
+    background: linear-gradient(135deg, #1a1f36 0%, #4f7cff 55%, #7c5cfc 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .hero-subtitle {
@@ -332,21 +427,20 @@ section {
     max-width: 380px;
     aspect-ratio: 2/3;
     border-radius: 24px;
-    background: transparent;
-    border: 1.5px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 
-                0 0 40px rgba(140, 82, 255, 0.1);
+    background: rgba(255, 255, 255, 0.5);
+    border: 1.5px solid rgba(255, 255, 255, 0.95);
+    box-shadow: var(--shadow-3d);
     overflow: hidden;
     display: flex;
     flex-direction: column;
     transition: var(--transition-smooth);
+    transform-style: preserve-3d;
+    animation: floatY 6s ease-in-out infinite;
 }
 
 .product-trailer-frame:hover {
-    transform: translateY(-5px) scale(1.01);
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.9), 
-                0 0 50px rgba(140, 82, 255, 0.2);
+    border-color: rgba(124, 92, 252, 0.25);
+    box-shadow: 0 40px 80px rgba(124, 92, 252, 0.22);
 }
 
 .mac-window-header {
@@ -381,13 +475,13 @@ section {
 .video-container {
     flex: 1;
     position: relative;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(26, 31, 54, 0.08);
     overflow: hidden;
     cursor: pointer;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(124, 92, 252, 0.12);
     border-radius: 12px;
     backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    box-shadow: inset 0 0 30px rgba(124, 92, 252, 0.05);
 }
 
 .demo-canvas {
@@ -397,7 +491,7 @@ section {
     width: 100%;
     height: 100%;
     z-index: 0;
-    background: radial-gradient(circle, #0c081e 0%, #000000 100%);
+    background: radial-gradient(circle, #eef2ff 0%, #e8ecfa 100%);
 }
 
 .demo-video {
@@ -472,12 +566,13 @@ section {
 
 .overlay-text {
     font-family: var(--font-heading);
-    font-size: 0.9rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     color: #ffffff;
-    opacity: 0.9;
+    opacity: 0.95;
     text-transform: uppercase;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .scroll-indicator {
@@ -528,7 +623,8 @@ section {
 
 /* --- 3. About Section (Minimal storytelling) --- */
 .about-section {
-    background-color: var(--bg-darker);
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(8px);
 }
 
 .about-grid {
@@ -559,7 +655,7 @@ section {
 }
 
 .about-line:nth-child(2) {
-    color: #d2d2d7;
+    color: #3d4a63;
 }
 
 .about-line:nth-child(3) {
@@ -575,7 +671,7 @@ section {
 
 .expertise-card {
     background: var(--card-bg);
-    border: 1px solid var(--glass-border);
+    border: 1px solid rgba(255, 255, 255, 0.95);
     border-radius: 24px;
     padding: 3.5rem 2.5rem;
     position: relative;
@@ -584,6 +680,9 @@ section {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    backdrop-filter: blur(16px);
+    box-shadow: var(--shadow-soft);
+    transform-style: preserve-3d;
 }
 
 .expertise-card::before {
@@ -605,10 +704,9 @@ section {
 }
 
 .expertise-card:hover {
-    transform: translateY(-8px);
     border-color: var(--glass-border-hover);
     background: var(--card-bg-hover);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--shadow-3d);
 }
 
 .card-icon {
@@ -668,7 +766,7 @@ section {
     color: var(--text-muted);
     position: relative;
     z-index: 2;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(124, 92, 252, 0.1);
     padding-top: 1rem;
     width: 100%;
 }
@@ -682,12 +780,13 @@ section {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(124, 92, 252, 0.06);
     padding: 8rem 0;
 }
 
 .project-page:nth-child(even) {
-    background-color: var(--bg-darker);
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(8px);
 }
 
 .project-container {
@@ -762,23 +861,18 @@ section {
 }
 
 .bullet-accent {
-    width: 24px;
-    height: 24px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    background: rgba(140, 82, 255, 0.1);
-    color: var(--accent-purple);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.85rem;
-    font-weight: bold;
+    background: var(--accent-gradient);
+    display: block;
     flex-shrink: 0;
-    margin-top: 2px;
+    margin-top: 8px;
+    box-shadow: 0 0 12px rgba(124, 92, 252, 0.4);
 }
 
 #project-hotelhub .bullet-accent {
-    background: rgba(79, 124, 255, 0.1);
-    color: var(--accent-blue);
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
 }
 
 .bullet-text {
@@ -810,9 +904,9 @@ section {
 }
 
 .mock-browser-frame:hover {
-    transform: translateY(-5px);
-    border-color: rgba(255,255,255,0.15);
-    box-shadow: 0 35px 80px rgba(0,0,0,0.85);
+    transform: translateY(-8px) rotateX(2deg);
+    border-color: rgba(124, 92, 252, 0.2);
+    box-shadow: 0 35px 80px rgba(124, 92, 252, 0.15);
 }
 
 .browser-header {
@@ -1158,7 +1252,8 @@ section {
 
 /* --- 6. Experience Section (Minimal Timeline) --- */
 .experience-section {
-    background-color: var(--bg-darker);
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(8px);
 }
 
 .timeline-container {
@@ -1175,7 +1270,7 @@ section {
     left: 0;
     width: 2px;
     height: 100%;
-    background: linear-gradient(to bottom, var(--glass-border), rgba(255,255,255,0.01));
+    background: linear-gradient(to bottom, var(--accent-purple), var(--accent-blue), transparent);
 }
 
 .timeline-item {
@@ -1191,13 +1286,14 @@ section {
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background-color: var(--bg-darker);
+    background-color: #ffffff;
     border: 3px solid var(--accent-blue);
     position: absolute;
     left: calc(-2rem - 6px);
     top: 6px;
     z-index: 2;
     transition: var(--transition-bounce);
+    box-shadow: 0 0 16px rgba(79, 124, 255, 0.35);
 }
 
 .timeline-item:nth-child(2) .timeline-dot {
@@ -1206,7 +1302,7 @@ section {
 
 .timeline-item:hover .timeline-dot {
     transform: scale(1.3);
-    background-color: #ffffff;
+    background-color: var(--accent-blue);
 }
 
 .timeline-date {
@@ -1223,17 +1319,20 @@ section {
 }
 
 .timeline-content {
-    background: rgba(255, 255, 255, 0.01);
-    border: 1px solid var(--glass-border);
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.95);
     padding: 2.2rem;
     border-radius: 16px;
     transition: var(--transition-smooth);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-soft);
 }
 
 .timeline-content:hover {
-    background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(255, 255, 255, 0.15);
-    transform: translateX(5px);
+    background: var(--card-bg-hover);
+    border-color: rgba(124, 92, 252, 0.2);
+    transform: translateX(8px) translateZ(10px);
+    box-shadow: var(--shadow-3d);
 }
 
 .timeline-company {
@@ -1261,14 +1360,27 @@ section {
     font-size: 0.98rem;
     color: var(--text-secondary);
     line-height: 1.5;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.timeline-lines li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent-blue);
 }
 
 
 /* --- 7. Final Section (Apple-style closing) --- */
 .contact-section {
-    padding: 12rem 0 4rem 0; /* Breath heavy layout */
+    padding: 12rem 0 4rem 0;
     text-align: center;
-    background: radial-gradient(circle at 50% 100%, rgba(140, 82, 255, 0.06) 0%, transparent 50%);
+    background: radial-gradient(circle at 50% 100%, rgba(124, 92, 252, 0.1) 0%, transparent 55%);
 }
 
 .contact-content {
@@ -1292,9 +1404,10 @@ section {
     letter-spacing: -0.04em;
     line-height: 1.05;
     margin-bottom: 2rem;
-    background: linear-gradient(135deg, #ffffff 40%, #a1a1a6 100%);
+    background: linear-gradient(135deg, #1a1f36 30%, #7c5cfc 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .contact-text {
@@ -1324,9 +1437,11 @@ section {
     border-radius: 30px;
     text-decoration: none;
     transition: var(--transition-bounce);
-    border: 1px solid var(--glass-border);
-    color: #ffffff;
+    border: 1px solid rgba(124, 92, 252, 0.15);
+    color: var(--text-primary);
     background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-soft);
 }
 
 .btn-icon {
@@ -1335,20 +1450,23 @@ section {
 }
 
 .contact-btn:hover {
-    transform: scale(1.06);
-    border-color: rgba(255, 255, 255, 0.25);
-    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-4px) scale(1.04);
+    border-color: rgba(124, 92, 252, 0.3);
+    background: var(--card-bg-hover);
+    box-shadow: var(--shadow-3d);
 }
 
 .contact-btn.email-btn {
     background: var(--accent-gradient);
     border: none;
-    box-shadow: 0 4px 20px rgba(140, 82, 255, 0.25);
+    color: #ffffff;
+    box-shadow: 0 8px 28px rgba(124, 92, 252, 0.28);
 }
 
 .contact-btn.email-btn:hover {
-    box-shadow: 0 6px 25px rgba(140, 82, 255, 0.45);
-    background: linear-gradient(135deg, #9963ff, #608cff);
+    box-shadow: 0 14px 36px rgba(124, 92, 252, 0.38);
+    background: linear-gradient(135deg, #8b6dff, #5a8fff, #4dc4f8);
+    color: #ffffff;
 }
 
 .contact-btn:active {
@@ -1357,7 +1475,7 @@ section {
 
 /* --- Footer --- */
 .footer {
-    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    border-top: 1px solid rgba(124, 92, 252, 0.1);
     padding-top: 3.5rem;
 }
 
@@ -1454,7 +1572,7 @@ section {
         left: 0;
         width: 100%;
         height: 0;
-        background: rgba(10, 10, 10, 0.98);
+        background: rgba(255, 255, 255, 0.97);
         backdrop-filter: blur(25px);
         flex-direction: column;
         align-items: center;
